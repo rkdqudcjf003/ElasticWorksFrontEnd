@@ -1,0 +1,13 @@
+
+import { Cookies } from "react-cookie";
+
+
+const cookies = new Cookies();
+
+export const setCookies = (name = String, value = String, option = ?) => {
+    return cookies.set(name, value, {...option});
+}
+
+export const getCookies = (name = "") => {
+    return cookies.get(name); 
+}

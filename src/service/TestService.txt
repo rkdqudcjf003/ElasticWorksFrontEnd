@@ -1,0 +1,116 @@
+// import axios from 'axios'
+// // import cookieParser from 'cookie-parser';
+// import Cookies from 'universal-cookie';
+// const AUTH_API_BASE_URL = "http://localhost:8222";
+ 
+// const cookies = new Cookies();
+
+// class TestService {
+//     // send username, password to the SERVER
+//     testLoginServaice(userId, userPwd) {
+//         return axios.post(AUTH_API_BASE_URL + "/login", {
+//             userId,
+//             userPwd
+//         }, {
+//             withCredentials: true
+//         })
+//         .then((res) => {
+//             if(res.status === 200){
+//                 alert('로그인 성공!');
+//                 const accessToken = cookies.get(accessToken);
+//                 return cookies.set('accessToken', accessToken);
+//             }
+//         })
+//         .then((data) => {
+//             console.log(data);
+//         })
+//         .catch((error) => {
+//             alert('로그인 실패!');        
+//             console.error(error);
+//         });
+//     }
+//     executeJwtAuthenticationService(userId, userPwd) {
+//         console.log(userId, userPwd);
+//         console.log(document.cookie);
+//         return axios.post(AUTH_API_BASE_URL + "/login", {
+//             userId,
+//             userPwd
+//         }, {
+//             withCredentials: true
+//         })
+//         .then((res) => {
+//             if(res.status === 200) {
+                
+//                 alert('로그인 성공!');
+//                 const accessToken = cookies.get(accessToken);
+//                 return cookies.set('accessToken', accessToken);
+//             }
+//         })
+//         .catch((error) => {
+//             alert('로그인 실패!');        
+//             console.error(error);
+//         });
+//     }
+
+//     executeHelloService() {
+//         console.log("===executeHelloService===")
+//         return axios.get(AUTH_API_BASE_URL + "/home");        
+//     }
+
+//     registerSuccessfulLoginForJwt(userId, accessToken) {
+//         console.log("===registerSuccessfulLoginForJwt===")
+//         cookies.get("accessToken", accessToken);
+//         cookies.get("authenticatedUser", userId);
+//         // sessionStorage.setItem('authenticatedUser', username)
+//         //this.setupAxiosInterceptors(this.createJWTToken(token))
+//         this.setupAxiosInterceptors();
+//     }
+
+//     createJWTToken(token) {
+//         return token
+//     }
+
+//     setupAxiosInterceptors() {
+//         axios.interceptors.request.use(
+//             config => {
+//                 const accessToken = cookies.get("accessToken");
+//                  if (accessToken) {
+//                     config.headers['Authorization'] = 'Bearer ' + accessToken;
+//                 }
+//                 // config.headers['Content-Type'] = 'application/json';
+//                 return config;
+//             },
+//             error => {
+//                 Promise.reject(error)
+//             });
+//     }
+
+//     logout() {
+//         axios.post(AUTH_API_BASE_URL + "/logout")
+//     }
+
+//     logoutResult() {
+//         axios.post(AUTH_API_BASE_URL + "/logout/result")
+//     }
+
+//     isUserLoggedIn() {
+//         const token = cookies.get("accessToken");
+//         console.log("===UserloggedInCheck===");
+//         console.log(token);
+
+//         if (token) {
+//             return true;
+//         }
+
+//         return false;
+//     }
+
+//     getLoggedInUserName() {
+//         //let user = sessionStorage.getItem('authenticatedUser')
+//         let user = localStorage.getItem("username");
+//         if (user === null) return "";
+//         return user;
+//     }
+// }
+
+// export default new TestService()
