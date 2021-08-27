@@ -31,7 +31,7 @@ class LogoutSuccessComponent extends Component {
             <>
                 <CCardFooter>
                     <CButton onClick={doLogout} size="sm" color="outline-warning"><CIcon name="cil-file" /> <midlle>로그아웃</midlle></CButton>&nbsp;
-
+    
                 </CCardFooter>
                 <h1>You are logged out</h1>
                 <div className="container">
