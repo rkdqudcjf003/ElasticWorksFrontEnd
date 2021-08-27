@@ -23,7 +23,7 @@ import { freeSet } from '@coreui/icons'
 
 
 
-class ListBoardComponent extends Component {
+class FAQBoardComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -261,4 +261,4 @@ class ListBoardComponent extends Component {
     }
 }
 
-export default ListBoardComponent;
+export default FAQBoardComponent;

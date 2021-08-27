@@ -85,7 +85,7 @@ const HeaderComponent = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/board">게시판</CHeaderNavLink>
+          <CHeaderNavLink to="/allBoard">게시판</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3" >
           <CHeaderNavLink to="/user/create-user">회원가입</CHeaderNavLink>

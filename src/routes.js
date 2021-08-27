@@ -41,7 +41,9 @@ const User = React.lazy(() => import('./views/users/User'));
 
 const ListUserComponent = React.lazy(() => import('./components/admin/ListUserComponent'));
 
-const ListBoardComponent = React.lazy(() => import('./components/board/ListBoardComponent'));
+const NoticeBoardComponent = React.lazy(() => import('./components/board/NoticeBoardComponent'));
+const FAQBoardComponent = React.lazy(() => import('./components/board/FAQBoardComponent'));
+const QNABoardComponent = React.lazy(() => import('./components/board/QNABoardComponent'));
 const CreateBoardComponent = React.lazy(() => import('./components/board/CreateBoardComponent'));
 const SelectOneBoardComponent = React.lazy(() => import('./components/board/SelectOneBoardComponent'));
 
@@ -100,11 +102,13 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User},
   
-  { path: '/board', exact: true, name: '게시판', component: ListBoardComponent },
-  { path: '/board/create-board/:boardIdx',exact: true,  name: '게시글 작성', component: CreateBoardComponent },
-  { path: '/board/read-board/:boardIdx', exact: true, name: '게시글 조회', component: SelectOneBoardComponent },
+  { path: '/NoticeBoard', exact: true, name: '공지사항', component: NoticeBoardComponent },
+  { path: '/FAQBoard', exact: true, name: 'FAQ', component: FAQBoardComponent },
+  { path: '/QNABoard', exact: true, name: 'Q & A', component: QNABoardComponent },
+  { path: '/board/create-board/:boardIdx',  name: '게시글 작성', component: CreateBoardComponent },
+  { path: '/board/read-board/:boardIdx', name: '게시글 조회', component: SelectOneBoardComponent },
 
-  { path: '/user/create-user',exact: true,  name: '회원가입', component: CreateUserComponent },
+  { path: '/user/create-user', exact: true,  name: '회원가입', component: CreateUserComponent },
   { path: '/user/read-user/:id', exact: true, name: '회원정보', component: SelectOneUserComponent },
 
   // { AuthenticatedRoute}

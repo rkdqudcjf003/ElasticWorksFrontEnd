@@ -51,17 +51,6 @@ class LoginComponent extends Component {
     loginClicked() {
         AuthenticationService.executeJwtAuthenticationService(this.state.userId, this.state.userPwd)
             .then(() => {
-                // console.log("axios 인터셉터")
-                // const cookieAccessToken = Cookies.get("accessToken");
-                
-                // const cookieRefreshToken = Cookies.get("refreshToken");
-                // // const getUserIdbyToken = cookieAccessToken.get("userId");
-                // // console.log(getUserIdbyToken)
-                // // response.data.Cookie.set("testCookie", cookieAccessToken);
-                // this.setState({
-                //     accessToken: cookieAccessToken,
-                //     refreshToken: cookieRefreshToken
-                // });
                 AuthenticationService.registerSuccessfulLoginForJwt(this.state.userId, this.state.accessToken, this.state.refreshToken)
             })
             .catch(() => {

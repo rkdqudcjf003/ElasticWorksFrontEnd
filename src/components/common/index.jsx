@@ -13,8 +13,11 @@ import FooterComponent from 'src/components/common/FooterComponent'
 import MainLayout from 'src/components/common/MainLayout'
 
 
+import NoticeBoardComponent from 'src/components/board/NoticeBoardComponent'
+import FAQBoardComponent from 'src/components/board/FAQBoardComponent'
+import QNABoardComponent from 'src/components/board/QNABoardComponent'
+
 import CreateBoardComponent from 'src/components/board/CreateBoardComponent'
-                                                                                                                                              import ListBoardComponent from 'src/components/board/ListBoardComponent'
 import SelectOneBoardComponent from 'src/components/board/SelectOneBoardComponent'
 
 import CreateUserComponent from 'src/components/user/CreateUserComponent'
@@ -60,8 +63,10 @@ export {
   HeaderDropdownTasksComponent,
   ContentComponent,
   //============================Board====================================
+  NoticeBoardComponent,
+  QNABoardComponent,
+  FAQBoardComponent,
   CreateBoardComponent,
-  ListBoardComponent,
   SelectOneBoardComponent,
   //============================User====================================
   CreateUserComponent,

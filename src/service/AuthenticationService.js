@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import Cookies from 'js-cookie';
-const AUTH_API_BASE_URL = "http://localhost:8222";
+const AUTH_API_BASE_URL = "http://localhost:8099";
 
 class AuthenticationService {
     // send username, password to the SERVER
@@ -62,9 +62,7 @@ class AuthenticationService {
                 const refreshToken = Cookies.get("refreshToken");
                 if (accessToken) {
                     config.headers['Cookie'] = accessToken
-                }
-
-                if (refreshToken) {
+                } else {
                     config.headers['Cookie'] = refreshToken;
                 }
 
@@ -78,8 +76,8 @@ class AuthenticationService {
 
     logout() {
         // const cookies = new Cookies();
-        Cookies.remove('accessToken', { path: '/'})
-        Cookies.remove('refreshToken', { path: '/'})
+        Cookies.remove('accessToken')
+        Cookies.remove('refreshToken')
         Cookies.remove('authenticatedUser')
         console.log("로그아웃 요청 전 Access_Token 확인: " + Cookies.get("accessToken"));
         console.log("로그아웃 요청 전 Refresh_Token 확인: " + Cookies.get("refreshToken"));

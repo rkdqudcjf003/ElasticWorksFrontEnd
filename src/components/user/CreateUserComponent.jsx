@@ -27,7 +27,7 @@ class CreateUserComponent extends Component {
             reCheckPwd: '',
             userRealName: '',
             userNickName: '',
-            userHp: '',
+            userPhoneNumber: '',
             userEmail1: '',
             userEmail2: '',
             userAddress1: '',
@@ -66,8 +66,8 @@ class CreateUserComponent extends Component {
         this.changeUserNickNameHandler = this.changeUserNickNameHandler.bind(this);
         this.inputUserNickNameBlur = this.inputUserNickNameBlur.bind(this);
 
-        this.changeUserHpHandler = this.changeUserHpHandler.bind(this);
-        this.inputUserHpBlur = this.inputUserHpBlur.bind(this);
+        this.changeUserPhoneNumberHandler = this.changeUserPhoneNumberHandler.bind(this);
+        this.inputUserPhoneNumberBlur = this.inputUserPhoneNumberBlur.bind(this);
 
         this.changeUserEmail1Handler = this.changeUserEmail1Handler.bind(this);
         this.changeUserEmail2Handler = this.changeUserEmail2Handler.bind(this);
@@ -221,33 +221,33 @@ class CreateUserComponent extends Component {
     }
 
     //=====================================휴대폰번호========================================
-    changeUserHpHandler = (e) => {
+    changeUserPhoneNumberHandler = (e) => {
         if (e.target.value > 12) {
             e.target.value = e.target.value.slice(0, 11)
         }
 
-        const hpCurValue = e.target.value
-        const hpNewValue = hpCurValue.replace(/[^0-9]/g, '')
+        const phoneNumberCurValue = e.target.value
+        const phoneNumberNewValue = phoneNumberCurValue.replace(/[^0-9]/g, '')
 
-        this.setState({ hpWarningText: false, userHp: hpNewValue })
+        this.setState({ phoneNumberWarningText: false, userPhoneNumber: phoneNumberNewValue })
 
     }
 
-    inputUserHpBlur() {
-        const hpRegExpHp = /^010?([0-9]{8})$/
-        const hpBlurCurValue = this.state.userHp
+    inputUserPhoneNumberBlur() {
+        const phoneNumberRegExp = /^010?([0-9]{8})$/
+        const phoneNumberBlurCurValue = this.state.userPhoneNumber
 
-        if (hpBlurCurValue === '') {
-            const hpBlurNewValue = hpBlurCurValue
-            return this.setState({ hpWarningText: false, userHp: hpBlurNewValue })
+        if (phoneNumberBlurCurValue === '') {
+            const phoneNumberBlurNewValue = phoneNumberBlurCurValue
+            return this.setState({ phoneNumberWarningText: false, userPhoneNumber: phoneNumberBlurNewValue })
         } else {
-            if (hpRegExpHp.test(hpBlurCurValue)) {
-                const hpBlurNewValue = hpBlurCurValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
-                return this.setState({ hpWarningText: false, userHp: hpBlurNewValue })
+            if (phoneNumberRegExp.test(phoneNumberBlurCurValue)) {
+                const PhoneNumberBlurNewValue = phoneNumberBlurCurValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
+                return this.setState({ phoneNumberWarningText: false, userPhoneNumber: phoneNumberBlurNewValue })
 
             } else {
-                const hpBlurNewValue = hpBlurCurValue
-                return this.setState({ hpWarningText: true, userHp: hpBlurNewValue })
+                const phoneNumberBlurNewValue = phoneNumberBlurCurValue
+                return this.setState({ phoneNumberWarningText: true, userPhoneNumber: phoneNumberBlurNewValue })
             }
         }
 
@@ -324,7 +324,7 @@ class CreateUserComponent extends Component {
             userPwd: this.state.userPwd,
             userRealName: this.state.userRealName,
             userNickName: this.state.userNickName,
-            userHp: this.state.userHp,
+            userPhoneNumber: this.state.userPhoneNumber,
             userEmail1: this.state.userEmail1,
             userEmail2: this.state.userEmail2,
             userAddress1: this.state.userAddress1,
@@ -411,8 +411,8 @@ class CreateUserComponent extends Component {
                                         <CLabel htmlFor="userHp">휴대폰</CLabel>
                                     </CCol>
                                     <CCol xs="12" md="3">
-                                        <CInput style={{ color: (this.state.hpWarningText ? 'red' : 'black') }} type="text" id="userHp" name="userHp" placeholder='11자리 "ex) 01012345678"' value={this.state.userHp} onChange={this.changeUserHpHandler} onFocus={() => this.changeUserHpHandler} onBlur={this.inputUserHpBlur} />
-                                        &nbsp;<small style={{ color: (this.state.hpWarningText ? 'red' : 'black') }}>{this.state.hpWarningText ? '올바른 휴대폰 번호를 입력하세요.' : ' '}</small>
+                                        <CInput style={{ color: (this.state.phoneNumberWarningText ? 'red' : 'black') }} type="text" id="userPhoneNumber" name="userPhoneNumber" placeholder='11자리 "ex) 01012345678"' value={this.state.userPhoneNumber} onChange={this.changeUserPhoneNumberHandler} onFocus={() => this.changeUserPhoneNumberHandler} onBlur={this.inputUserPhoneNumberBlur} />
+                                        &nbsp;<small style={{ color: (this.state.phoneNumberWarningText ? 'red' : 'black') }}>{this.state.phoneNumberWarningText ? '올바른 휴대폰 번호를 입력하세요.' : ' '}</small>
                                     </CCol>
                                 </CFormGroup>
                                 <CFormGroup row>
