@@ -242,7 +242,7 @@ class CreateUserComponent extends Component {
             return this.setState({ phoneNumberWarningText: false, userPhoneNumber: phoneNumberBlurNewValue })
         } else {
             if (phoneNumberRegExp.test(phoneNumberBlurCurValue)) {
-                const PhoneNumberBlurNewValue = phoneNumberBlurCurValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
+                const phoneNumberBlurNewValue = phoneNumberBlurCurValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
                 return this.setState({ phoneNumberWarningText: false, userPhoneNumber: phoneNumberBlurNewValue })
 
             } else {
