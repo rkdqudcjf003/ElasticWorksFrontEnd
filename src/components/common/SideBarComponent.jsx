@@ -55,9 +55,8 @@ const SideBarComponent = () => {
         />
       </CSidebarBrand>
       <CSidebarNav>
-      //test
       {/* {adminOrNot()} */}
-        <CCreateElement
+        {/* <CCreateElement
           items={navigation}
           components={{
             CSidebarNavDivider,
@@ -65,7 +64,7 @@ const SideBarComponent = () => {
             CSidebarNavItem,
             CSidebarNavTitle
           }}
-        />
+        /> */}
       </CSidebarNav>
       <CSidebarMinimizer className="c-d-md-down-none"/>
     </CSidebar>
