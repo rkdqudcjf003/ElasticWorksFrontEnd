@@ -41,6 +41,7 @@ const User = React.lazy(() => import('./views/users/User'));
 
 const ListUserComponent = React.lazy(() => import('./components/admin/ListUserComponent'));
 
+const AllBoardComponent = React.lazy(() => import('./components/board/AllBoardComponent'));
 const NoticeBoardComponent = React.lazy(() => import('./components/board/NoticeBoardComponent'));
 const FAQBoardComponent = React.lazy(() => import('./components/board/FAQBoardComponent'));
 const QNABoardComponent = React.lazy(() => import('./components/board/QNABoardComponent'));
@@ -102,9 +103,10 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User},
   
-  { path: '/NoticeBoard', exact: true, name: '공지사항', component: NoticeBoardComponent },
-  { path: '/FAQBoard', exact: true, name: 'FAQ', component: FAQBoardComponent },
-  { path: '/QNABoard', exact: true, name: 'Q & A', component: QNABoardComponent },
+  { path: '/all-board', exact: true, name: '전체글', component: AllBoardComponent },
+  { path: '/notice-board', exact: true, name: '공지사항', component: NoticeBoardComponent },
+  { path: '/FAQ-board', exact: true, name: 'FAQ', component: FAQBoardComponent },
+  { path: '/QNA-board', exact: true, name: 'Q & A', component: QNABoardComponent },
   { path: '/board/create-board/:boardIdx',  name: '게시글 작성', component: CreateBoardComponent },
   { path: '/board/read-board/:boardIdx', name: '게시글 조회', component: SelectOneBoardComponent },
 

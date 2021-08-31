@@ -24,11 +24,10 @@ import {
   HeaderDropdownTasksComponent
 } from 'src/components/common/index'
 import AuthenticationService from 'src/service/AuthenticationService'
-import { func } from 'prop-types'
 
 
 const HeaderComponent = () => {
-  const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+  
   // AuthenticationService.logout();
 
 
@@ -52,7 +51,6 @@ const HeaderComponent = () => {
   //   </CHeaderNavItem>
   // }
 
-  const isLoggedIn = isUserLoggedIn;
 
   const dispatch = useDispatch()
   const sidebarShow = useSelector(state => state.sidebarShow)
@@ -71,15 +69,28 @@ const HeaderComponent = () => {
   const adminOrNot = () => {
     if (true) {
       return <CHeaderNavItem className="px-3">
-             <CHeaderNavLink to="/admin" >관리</CHeaderNavLink>
-             </CHeaderNavItem>
-  }else{
-    
+        <CHeaderNavLink to="/admin" >관리</CHeaderNavLink>
+      </CHeaderNavItem>
+    } else {
+
+    }
   }
-}
-  
+  const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+
+  const isLoggedIn = () => {
+    if (isUserLoggedIn === true) {
+      return <CHeaderNavItem className="px-3">
+        <CHeaderNavLink to="/logout" >로그아웃</CHeaderNavLink>
+      </CHeaderNavItem>
+    } else {
+      return <CHeaderNavItem className="px-3" >
+        <CHeaderNavLink to="/sign-in">로그인</CHeaderNavLink>
+      </CHeaderNavItem>
+    }
+  }
+
   return (
-    
+
     <CHeader withSubheader>
       <CToggler
         inHeader
@@ -97,25 +108,24 @@ const HeaderComponent = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/allBoard">게시판</CHeaderNavLink>
+          <CHeaderNavLink to="/all-board">전체글</CHeaderNavLink>
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-3" >
+          <CHeaderNavLink to="/notice-board">공지사항</CHeaderNavLink>
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-3" >
+          <CHeaderNavLink to="/FAQ-board">FAQ</CHeaderNavLink>
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-3" >
+          <CHeaderNavLink to="/QNA-board">Q & A</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3" >
           <CHeaderNavLink to="/user/create-user">회원가입</CHeaderNavLink>
         </CHeaderNavItem>
-        {
-          isLoggedIn
-            ?
-            <CHeaderNavItem className="px-3">
-              <CHeaderNavLink to="/logout" >로그아웃</CHeaderNavLink>
-            </CHeaderNavItem>
-            :
-            <CHeaderNavItem className="px-3" >
-              <CHeaderNavLink to="/sign-in">로그인</CHeaderNavLink>
-            </CHeaderNavItem>
-        }
+        {isLoggedIn()}
         {adminOrNot()}
         <CHeaderNavItem className="px-3">
-              <CHeaderNavLink to="/logout" >로그아웃</CHeaderNavLink>
+          <CHeaderNavLink to="/logout" >로그아웃</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/users">Users</CHeaderNavLink>

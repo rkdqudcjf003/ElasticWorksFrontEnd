@@ -45,7 +45,7 @@ class CreateUserComponent extends Component {
             rePwdChecking: false,
 
             nameWarningText: false,
-            hpWarningText: false,
+            phoneNumberWarningText: false,
 
 
         }
@@ -221,7 +221,7 @@ class CreateUserComponent extends Component {
     }
 
     //=====================================휴대폰번호========================================
-    changeUserPhoneNumberHandler = (e) => {
+    changeUserPhoneNumberHandler(e) {
         if (e.target.value > 12) {
             e.target.value = e.target.value.slice(0, 11)
         }
@@ -230,7 +230,6 @@ class CreateUserComponent extends Component {
         const phoneNumberNewValue = phoneNumberCurValue.replace(/[^0-9]/g, '')
 
         this.setState({ phoneNumberWarningText: false, userPhoneNumber: phoneNumberNewValue })
-
     }
 
     inputUserPhoneNumberBlur() {
@@ -284,7 +283,7 @@ class CreateUserComponent extends Component {
 
         if (email2BlurCurValue === '') {
             const email2BlurNewValue = email2BlurCurValue
-            return this.setState({ email2WarningText: false, userHp: email2BlurNewValue })
+            return this.setState({ email2WarningText: false, userEmail2: email2BlurNewValue })
         } else {
             if (emailRegExp.test(email2BlurCurValue)) {
                 const email2BlurNewValue = email2BlurCurValue
@@ -408,10 +407,10 @@ class CreateUserComponent extends Component {
                                 </CFormGroup>
                                 <CFormGroup row>
                                     <CCol md="3">
-                                        <CLabel htmlFor="userHp">휴대폰</CLabel>
+                                        <CLabel htmlFor="userPhoneNumber">휴대폰</CLabel>
                                     </CCol>
                                     <CCol xs="12" md="3">
-                                        <CInput style={{ color: (this.state.phoneNumberWarningText ? 'red' : 'black') }} type="text" id="userPhoneNumber" name="userPhoneNumber" placeholder='11자리 "ex) 01012345678"' value={this.state.userPhoneNumber} onChange={this.changeUserPhoneNumberHandler} onFocus={() => this.changeUserPhoneNumberHandler} onBlur={this.inputUserPhoneNumberBlur} />
+                                        <CInput style={{ color: (this.state.phoneNumberWarningText ? 'red' : 'black') }} type="text" id="userPhoneNumber" name="userPhoneNumber" placeholder='11자리 "ex) 01012345678"' value={this.state.userPhoneNumber} onChange={this.changeUserPhoneNumberHandler} onFocus={this.changeUserPhoneNumberHandler} onBlur={this.inputUserPhoneNumberBlur} />
                                         &nbsp;<small style={{ color: (this.state.phoneNumberWarningText ? 'red' : 'black') }}>{this.state.phoneNumberWarningText ? '올바른 휴대폰 번호를 입력하세요.' : ' '}</small>
                                     </CCol>
                                 </CFormGroup>
@@ -446,18 +445,6 @@ class CreateUserComponent extends Component {
                                         <CInput type="text" id="userAddress2" name="userAddress2" placeholder="상세주소를 입력하세요" value={this.state.userAddress2} onChange={this.changeUserAddress2Handler} />
                                     </CCol>
                                 </CFormGroup>
-                                <CFormGroup row >
-                                    <CCol md="3">
-                                        <CLabel htmlFor="userRole">계정등급</CLabel>
-                                    </CCol>
-                                    <CCol xs="12" md="3" >
-                                        <CSelect custom id="userRole" name="userRole"  value={userRole} onChange={changeUserRoleHandler} defaultValue="USER"  readOnly>
-                                            <option value="USER">회원</option>
-                                            <option value="ADMIN">관리자</option>
-                                        </CSelect>
-                                    </CCol>
-                                </CFormGroup>
-
                             </CForm>
                         </CCardBody>
                         <CCardFooter>

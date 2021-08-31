@@ -32,6 +32,7 @@ class QNABoardComponent extends Component {
             keyword: "",
             type: "",
             paging: {},
+            category: 3,
             boards: []
         }
 
@@ -51,7 +52,7 @@ class QNABoardComponent extends Component {
             keyword: e.target.value
         });
     }
-    
+
     searchClick = () => {
         this.setState({ keyword: this.state.keyword });
         this.setState({ type: this.state.type });
@@ -72,24 +73,24 @@ class QNABoardComponent extends Component {
     // }
 
     componentDidMount() {
-        BoardService.getBoards(this.state.page_no, this.state.keyword, this.state.type).then((res) => {
-            
-            console.log(res);
-            this.setState({
-                page_no: res.data.pageInfo.currentPageNo,
-                type: res.data.pageInfo.searchType,
-                keyword: res.data.pageInfo.searchKeyword,
-                paging: res.data.pageInfo,
-                boards: res.data.boardList
-            });
+        BoardService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.category)
+            .then((res) => {
+                console.log(res);
+                this.setState({
+                    page_no: res.data.pageInfo.currentPageNo,
+                    type: res.data.pageInfo.searchType,
+                    keyword: res.data.pageInfo.searchKeyword,
+                    paging: res.data.pageInfo,
+                    boards: res.data.boardList
+                });
 
-        });
+            });
 
     }
 
-    listBoard(page_no, keyword, type) {
-        BoardService.getBoards(page_no, keyword, type).then((res) => {
-            
+    listBoard(page_no, keyword, type, category) {
+        BoardService.getBoards(page_no, keyword, type, category)
+            .then((res) => {
             console.log(res)
             this.setState({
                 page_no: res.data.pageInfo.currentPageNo,
@@ -124,7 +125,7 @@ class QNABoardComponent extends Component {
                 <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword)} tabIndex="-1">
                     <CButton color="secondary">
                         ‹
-                </CButton>
+                    </CButton>
                 </a>
             );
         }
@@ -148,7 +149,7 @@ class QNABoardComponent extends Component {
                 <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type)} tabIndex="-1">
                     <CButton color="secondary">
                         «
-                </CButton>
+                    </CButton>
                 </a>
             );
         }
@@ -190,14 +191,15 @@ class QNABoardComponent extends Component {
                                     onRowClick={(item) => this.readBoard(item.boardIdx)}
                                     items={boards}
                                     fields={[
-                                        { key: 'boardIdx', label: '번호' },
+                                        { key: 'idx', label: '번호' },
                                         { key: 'title', label: '제목' },
-                                        { key: 'content', label: '내용' },
                                         { key: 'writer', label: '작성자' },
+                                        { key: 'content', label: '내용' },
                                         { key: 'category', label: '카테고리' },
-                                        { key: 'viewCnt', label: '조회수' },
-                                        { key: 'noticeYn', label: '공지여부' },
-                                        { key: 'deleteYn', label: '삭제여부' }]}
+                                        { key: 'view', label: '조회수' },
+                                        { key: 'likeCnt', label: '좋아요' },
+                                        { key: 'insertTime', label: '작성시간' },
+                                        { key: 'updateTime', label: '수정시간' }]}
                                     hover
                                     striped
                                     bordered

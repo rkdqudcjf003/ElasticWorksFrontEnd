@@ -23,7 +23,7 @@ import { freeSet } from '@coreui/icons'
 
 
 
-class FAQBoardComponent extends Component {
+class AllBoardComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -32,7 +32,7 @@ class FAQBoardComponent extends Component {
             keyword: "",
             type: "",
             paging: {},
-            category: 2,
+            category: 0,
             boards: []
         }
 
@@ -81,7 +81,6 @@ class FAQBoardComponent extends Component {
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
                     paging: res.data.pageInfo,
-                    category: res.data.category,
                     boards: res.data.boardList
                 });
             });
@@ -96,7 +95,6 @@ class FAQBoardComponent extends Component {
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
                     paging: res.data.pageInfo,
-                    category: res.data.category,
                     boards: res.data.boardList
                 });
             });
@@ -261,4 +259,4 @@ class FAQBoardComponent extends Component {
     }
 }
 
-export default FAQBoardComponent;
+export default AllBoardComponent;

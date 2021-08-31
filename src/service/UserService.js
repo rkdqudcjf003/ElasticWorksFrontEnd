@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 
-const USER_API_BASE_URL = "http://localhost:8222/api/user";
+const USER_API_BASE_URL = "http://localhost:8099/api/user";
 
 
 
 
 class UserService {
     createUser(user) {
-        return axios.post(USER_API_BASE_URL + "/insert", user);
+        return axios.post(USER_API_BASE_URL + "/signUp", user);
     }
     getOneUser(id) {
         return axios.get(USER_API_BASE_URL + "/read/" + id);

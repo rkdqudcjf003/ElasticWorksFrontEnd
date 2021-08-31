@@ -21,14 +21,13 @@ import CIcon from '@coreui/icons-react'
 
 class CreateBoardComponent extends Component {
     constructor(props) {
-        // const cookies = new Cookies();
         super(props);
         const { cookies } = props;
         this.state = {
             boardIdx: this.props.match.params.boardIdx,
             title: '',
             content: '',
-            writer: cookies.get('accessToken') || '',
+            writer: localStorage.getItem('authenticatedUser') || '',
             category: ''
         }
 
@@ -152,8 +151,9 @@ class CreateBoardComponent extends Component {
                                     <CCol xs="12" md="9">
                                         <CSelect custom name="category" id="category" value={this.state.category} onChange={this.changeCategoryHandler}>
                                             <option value="0">카테고리를 선택해주세요.</option>
-                                            <option value="자유게시판">자유게시판</option>
-                                            <option value="질문과 답변">질문과 답변</option>
+                                            <option value="1">공지사항</option>
+                                            <option value="1">FAQ</option>
+                                            <option value="2">QNA</option>
                                         </CSelect>
                                     </CCol>
                                 </CFormGroup>
