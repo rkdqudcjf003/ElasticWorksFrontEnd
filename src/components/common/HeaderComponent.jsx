@@ -24,6 +24,7 @@ import {
   HeaderDropdownTasksComponent
 } from 'src/components/common/index'
 import AuthenticationService from 'src/service/AuthenticationService'
+import { func } from 'prop-types'
 
 
 const HeaderComponent = () => {
@@ -66,8 +67,19 @@ const HeaderComponent = () => {
     dispatch({ type: 'set', sidebarShow: val })
   }
 
-
+  //조건부 렌더링(admin)
+  const adminOrNot = () => {
+    if (true) {
+      return <CHeaderNavItem className="px-3">
+             <CHeaderNavLink to="/admin" >관리</CHeaderNavLink>
+             </CHeaderNavItem>
+  }else{
+    
+  }
+}
+  
   return (
+    
     <CHeader withSubheader>
       <CToggler
         inHeader
@@ -101,9 +113,10 @@ const HeaderComponent = () => {
               <CHeaderNavLink to="/sign-in">로그인</CHeaderNavLink>
             </CHeaderNavItem>
         }
+        {adminOrNot()}
         <CHeaderNavItem className="px-3">
               <CHeaderNavLink to="/logout" >로그아웃</CHeaderNavLink>
-            </CHeaderNavItem>
+        </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/users">Users</CHeaderNavLink>
         </CHeaderNavItem>
