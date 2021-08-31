@@ -13,6 +13,7 @@ import {
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
+import ListUserComponent from '../admin/ListUserComponent'
 
 // sidebar nav config
 import navigation from 'src/components/common/_nav'
@@ -21,6 +22,21 @@ const SideBarComponent = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
 
+  //SideBard조건부 렌더링(admin)
+  // const adminOrNot = () => {
+  //   if (true) {
+  //     return  <CCreateElement
+  //               items={navigation}
+  //               components={{
+  //                 CSidebarNavDivider,
+  //                 CSidebarNavDropdown,
+  //                 CSidebarNavItem,
+  //                 CSidebarNavTitle
+  //               }}
+  //             />
+  //   }
+  // }
+  
   return (
     <CSidebar
       show={show}
@@ -39,7 +55,8 @@ const SideBarComponent = () => {
         />
       </CSidebarBrand>
       <CSidebarNav>
-
+      //test
+      {/* {adminOrNot()} */}
         <CCreateElement
           items={navigation}
           components={{

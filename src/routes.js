@@ -1,4 +1,5 @@
 import React from 'react';
+import AdminComponent from './components/admin/AdminComponent';
 
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -118,8 +119,7 @@ const routes = [
   { path: '/logout', exact: true, name: '로그아웃', component: LogoutSuccessComponent },
   // { path: '/checkLogin', exact: true, name: '로그인확인', component: AuthenticatedRoute },
 
-  { path: '/admin/userList', exact: true, name: '회원목록', component: ListUserComponent },
-
+  { path: '/admin', exact: true, name: '회원목록', component: AdminComponent },
   // { path: '/test', exact: true, name: '테스트', component: Test }
 
 ];
