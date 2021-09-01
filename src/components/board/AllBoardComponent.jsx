@@ -64,13 +64,9 @@ class AllBoardComponent extends Component {
     }
 
 
-    readBoard(idx, category) {
-        this.props.history.push(`/board/read-board/${idx}`, category);
+    readBoard(idx) {
+        this.props.history.push(`/board/read-board/${idx}`);
     }
-
-    // rowSelectHandler = () => {
-    //     this.readBoard(this.state.boards.boardIdx)
-    // }
 
     componentDidMount() {
         BoardService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.category)
@@ -80,6 +76,7 @@ class AllBoardComponent extends Component {
                     page_no: res.data.pageInfo.currentPageNo,
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
+                    category: res.data.pageInfo.category,
                     paging: res.data.pageInfo,
                     boards: res.data.boardList
                 });
@@ -94,6 +91,7 @@ class AllBoardComponent extends Component {
                     page_no: res.data.pageInfo.currentPageNo,
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
+                    category: res.data.pageInfo.category,
                     paging: res.data.pageInfo,
                     boards: res.data.boardList
                 });
@@ -106,7 +104,7 @@ class AllBoardComponent extends Component {
             pageNums.push(i);
         }
         return ((pageNums.map((page) =>
-            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type)}>
+            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type, this.state.category)}>
                 <CButton color="secondary" key={page.toString()} >
                     {page}
                 </CButton>
@@ -118,7 +116,7 @@ class AllBoardComponent extends Component {
     isPagingPrev() {
         if (this.state.paging.prevPage) {
             return (
-                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword)} tabIndex="-1">
+                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
                     <CButton color="secondary">
                         ‹
                     </CButton>
@@ -130,7 +128,7 @@ class AllBoardComponent extends Component {
     isPagingNext() {
         if (this.state.paging.nextPage) {
             return (
-                <a href='#!' onClick={() => this.listBoard((this.state.paging.currentPageNo + 1), this.state.keyword, this.state.type)} tabIndex="-1" >
+                <a href='#!' onClick={() => this.listBoard((this.state.paging.currentPageNo + 1), this.state.keyword, this.state.type, this.state.category)} tabIndex="-1" >
                     <CButton color="secondary">
                         ›
                     </CButton>
@@ -142,7 +140,7 @@ class AllBoardComponent extends Component {
     isMoveToFirstPage() {
         if (this.state.page_no !== 1) {
             return (
-                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type)} tabIndex="-1">
+                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
                     <CButton color="secondary">
                         «
                     </CButton>
@@ -154,7 +152,7 @@ class AllBoardComponent extends Component {
     isMoveToLastPage() {
         if (this.state.page_no !== this.state.paging.pageTotalCount) {
             return (
-                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type)}>
+                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type, this.state.category)}>
                     <CButton color="secondary">
                         »
                     </CButton>

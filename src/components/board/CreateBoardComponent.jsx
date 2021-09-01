@@ -48,8 +48,7 @@ class CreateBoardComponent extends Component {
         this.setState({ category: event.target.value });
     }
 
-    createBoard = (event) => {
-        event.preventDefault();
+    createBoard = async function () {
         let board = {
             title: this.state.title,
             content: this.state.content,
@@ -57,17 +56,28 @@ class CreateBoardComponent extends Component {
             category: this.state.category
 
         };
-        console.log("board => " + JSON.stringify(board));
         if (this.state.idx === '_create') {
-            BoardService.createBoard(board)
-                .then(res => {
-                    this.props.history.push('/all-board');
-                });
+            if (window.confirm("작성하신 내용으로 게시글을 작성하시겠습니까?")) {
+                BoardService.createBoard(board)
+                    .then(res => {
+                        console.log("CREATE RESULT => " + JSON.stringify(board));
+                        this.props.history.push('/all-board');
+                    });
+            }
         } else {
-            BoardService.updateBoard(this.state.idx, board)
-                .then(res => {
-                    this.props.history.push('/all-board');
-                });
+            if (window.confirm("게시글을 수정하시겠습니까?\n수정하기 전 게시글은 복구 할 수 없습니다.")) {
+                BoardService.updateBoard(this.state.idx, board)
+                    .then(res => {
+                        console.log("UPDATE RESULT => " + JSON.stringify(res));
+                        if (res.status == 200) {
+                            alert("게시글 수정이 성공했습니다.");
+                            this.props.history.push('/all-board');
+                        } else {
+                            alert("게시글 수정이 실패했습니다.");
+                        }
+                    });
+
+            }
         }
     }
 
@@ -90,7 +100,7 @@ class CreateBoardComponent extends Component {
             BoardService.getOneBoard(this.state.idx)
                 .then((res) => {
                     let board = res.data;
-                    console.log("board => " + JSON.stringify(board));
+                    console.log("GET ONE BOARD => " + JSON.stringify(board));
 
                     this.setState({
                         title: board.title,
@@ -110,10 +120,10 @@ class CreateBoardComponent extends Component {
                 <CCol xs="12" md="12">
                     <CCard>
                         <CCardHeader>
-                            
-                                {
-                                    this.getTitle()
-                                }
+
+                            {
+                                this.getTitle()
+                            }
                         </CCardHeader>
                         <CCardBody>
                             <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
@@ -155,8 +165,8 @@ class CreateBoardComponent extends Component {
                                         <CSelect custom name="category" id="category" value={this.state.category} onChange={this.changeCategoryHandler}>
                                             <option value="0">카테고리를 선택해주세요.</option>
                                             <option value="1">공지사항</option>
-                                            <option value="1">FAQ</option>
-                                            <option value="2">QNA</option>
+                                            <option value="2">FAQ</option>
+                                            <option value="3">QNA</option>
                                         </CSelect>
                                     </CCol>
                                 </CFormGroup>
@@ -164,12 +174,12 @@ class CreateBoardComponent extends Component {
                             </CForm>
                         </CCardBody>
                         <CCardFooter>
-                            <CButton onClick={this.createBoard} type="submit" size="sm" color="outline-success"><CIcon name="cil-file" /> <midlle>글 작성</midlle></CButton>&nbsp;
+                            <CButton onClick={() =>  this.createBoard()} type="submit" size="sm" color="outline-success"><CIcon name="cil-file" /> <midlle>글 작성</midlle></CButton>&nbsp;
                             <CButton onClick={this.cancel.bind(this)} type="reset" size="sm" color="outline-danger"><CIcon name="cil-x-circle" /> <midlle>취소</midlle></CButton>
                         </CCardFooter>
                     </CCard>
                 </CCol>
-            </>
+            </> 
 
         );
     }
