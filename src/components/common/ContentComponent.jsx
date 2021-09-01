@@ -26,9 +26,8 @@ const ContentComponent = () => {
         <Suspense fallback={loading}>
           <Switch>
            
-            {/* <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent} />
-            <AuthenticatedRoute path="/logout" component={LogoutSuccessComponent} /> */}
-            {/* <AuthenticatedRoute path="/test" component={TestComponent}/> */}
+
+
 
             {routes.map((route, idx) => {
                 return route.component && (

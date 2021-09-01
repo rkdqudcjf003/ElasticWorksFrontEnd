@@ -64,13 +64,9 @@ class FAQBoardComponent extends Component {
     }
 
 
-    readBoard(boardIdx) {
-        this.props.history.push(`/board/read-board/${boardIdx}`);
+    readBoard(idx) {
+        this.props.history.push(`/board/read-board/${idx}`);
     }
-
-    // rowSelectHandler = () => {
-    //     this.readBoard(this.state.boards.boardIdx)
-    // }
 
     componentDidMount() {
         BoardService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.category)
@@ -186,7 +182,7 @@ class FAQBoardComponent extends Component {
                             <CCardBody>
                                 <CDataTable
                                     clickableRows
-                                    onRowClick={(item) => this.readBoard(item.boardIdx)}
+                                    onRowClick={(item) => this.readBoard(item.idx)}
                                     items={boards}
                                     fields={[
                                         { key: 'idx', label: '번호' },

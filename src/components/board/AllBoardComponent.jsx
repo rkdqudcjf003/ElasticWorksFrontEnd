@@ -64,8 +64,8 @@ class AllBoardComponent extends Component {
     }
 
 
-    readBoard(boardIdx) {
-        this.props.history.push(`/board/read-board/${boardIdx}`);
+    readBoard(idx, category) {
+        this.props.history.push(`/board/read-board/${idx}`, category);
     }
 
     // rowSelectHandler = () => {
@@ -184,7 +184,7 @@ class AllBoardComponent extends Component {
                             <CCardBody>
                                 <CDataTable
                                     clickableRows
-                                    onRowClick={(item) => this.readBoard(item.boardIdx)}
+                                    onRowClick={(item) => this.readBoard(item.idx)}
                                     items={boards}
                                     fields={[
                                         { key: 'idx', label: '번호' },

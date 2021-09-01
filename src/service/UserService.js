@@ -16,9 +16,6 @@ class UserService {
     updateUser(id, user) {
         return axios.put(USER_API_BASE_URL + "/" + id, user);
     }
-    // loginUser(id, pwd) {
-    //     return axios.post(USER_API_BASE_URL + "/login", id, pwd);
-    // }
 }
 
 export default new UserService();

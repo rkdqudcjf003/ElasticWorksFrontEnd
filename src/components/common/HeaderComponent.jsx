@@ -125,9 +125,6 @@ const HeaderComponent = () => {
         {isLoggedIn()}
         {adminOrNot()}
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/logout" >로그아웃</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/users">Users</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">

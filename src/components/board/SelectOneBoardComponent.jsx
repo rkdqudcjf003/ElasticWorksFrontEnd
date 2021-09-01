@@ -21,20 +21,46 @@ class SelectOneBoardComponent extends Component {
         super(props);
 
         this.state = {
-            boardIdx: this.props.match.params.boardIdx,
+            idx: this.props.match.params.idx,
             board: {}
         }
+
+        this.goToUpdate = this.goToUpdate.bind(this);
 
     }
 
     componentDidMount() {
-        BoardService.getOneBoard(this.state.boardIdx).then(res => {
-            this.setState({ board: res.data });
-        });
+        BoardService.getOneBoard(this.state.idx)
+            .then(res => {
+                this.setState(
+                    { board: res.data }
+                );
+                console.log("get result => " + JSON.stringify(res.data));
+            });
     }
 
     goToList() {
-        this.props.history.push('/board');
+        this.props.history.push('/all-board');
+    }
+
+    goToUpdate = (event) => {
+        event.preventDefault();
+        this.props.history.push(`/board/create-board/${this.state.idx}`);
+    }
+
+    deleteView = async function () {
+        if (window.confirm("정말로 글을 삭제하시겠습니까?\n삭제된 글은 복구 할 수 없습니다.")) {
+            BoardService.deleteBoard(this.state.idx, this.state.board)
+                .then(res => {
+                    console.log("delete result => " + JSON.stringify(res));
+                    if (res.status == 200) {
+                        this.props.history.push('/all-board');
+                    } else {
+                        alert("글 삭제가 실패했습니다.");
+                    }
+                });
+
+        }
     }
 
     render() {
@@ -49,10 +75,10 @@ class SelectOneBoardComponent extends Component {
                             <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
                                 <CFormGroup row>
                                     <CCol md="3">
-                                        <CLabel name="title">작성자</CLabel> 
+                                        <CLabel name="title">작성자</CLabel>
                                     </CCol>
                                     <CCol xs="12" md="9">
-                                        <CInput type="text" id="text-input" name="writer"  value={this.state.board.writer} onChange={this.changeWriterHandler} />
+                                        <CInput type="text" id="text-input" name="writer" value={this.state.board.writer} onChange={this.changeWriterHandler} />
                                     </CCol>
                                 </CFormGroup>
                                 <CFormGroup row>
@@ -89,7 +115,9 @@ class SelectOneBoardComponent extends Component {
                             </CForm>
                         </CCardBody>
                         <CCardFooter>
-                            <CButton onClick={this.goToList.bind(this)} type="submit" size="sm" color="outline-success"><CIcon name="cil-file" /> <midlle>글 목록으로 이동</midlle></CButton>
+                            <CButton onClick={this.goToUpdate} color="outline-dark"> <midlle>게시글 수정</midlle></CButton>
+                            <CButton onClick={() => this.deleteView()} color="outline-danger" style={{ marginLeft: "10px" }}><midlle>게시글 삭제</midlle></CButton>
+                            <CButton onClick={this.goToList.bind(this)} type="submit" size="sm" color="outline-success" style={{ marginLeft: "10px" }} ><CIcon name="cil-file" /> <midlle>게시글 목록</midlle></CButton>
                         </CCardFooter>
                     </CCard>
                 </CCol>

@@ -20,17 +20,20 @@ class BoardService {
 
     createBoard(board) {
         return axios.post(BOARD_API_BASE_URL + "/insert", board);
+    }
 
+    getOneBoard(idx) {
+        return axios.get(BOARD_API_BASE_URL + "/read/" + idx);
 
     }
 
-    getOneBoard(boardIdx) {
-        return axios.get(BOARD_API_BASE_URL + "/read/" + boardIdx);
+    updateBoard(idx, board) {
+        return axios.put(BOARD_API_BASE_URL + "/" + idx, board);
 
     }
-    updateBoard(boardIdx, board) {
-        return axios.put(BOARD_API_BASE_URL + "/" + boardIdx, board);
 
+    deleteBoard(idx, board) {
+        return axios.put(BOARD_API_BASE_URL + "/delete" + idx, board);
     }
 }
 

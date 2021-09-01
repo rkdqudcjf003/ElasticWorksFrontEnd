@@ -108,8 +108,8 @@ const routes = [
   { path: '/notice-board', exact: true, name: '공지사항', component: NoticeBoardComponent },
   { path: '/FAQ-board', exact: true, name: 'FAQ', component: FAQBoardComponent },
   { path: '/QNA-board', exact: true, name: 'Q & A', component: QNABoardComponent },
-  { path: '/board/create-board/:boardIdx',  name: '게시글 작성', component: CreateBoardComponent },
-  { path: '/board/read-board/:boardIdx', name: '게시글 조회', component: SelectOneBoardComponent },
+  { path: '/board/create-board/:idx',  name: '게시글 작성', component: CreateBoardComponent },
+  { path: '/board/read-board/:idx', name: '게시글 조회', component: SelectOneBoardComponent },
 
   { path: '/user/create-user', exact: true,  name: '회원가입', component: CreateUserComponent },
   { path: '/user/read-user/:id', exact: true, name: '회원정보', component: SelectOneUserComponent },

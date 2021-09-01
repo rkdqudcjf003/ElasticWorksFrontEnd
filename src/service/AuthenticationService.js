@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { responseInterceptor } from 'http-proxy-middleware';
 
 import Cookies from 'js-cookie';
 const AUTH_API_BASE_URL = "http://localhost:8099";

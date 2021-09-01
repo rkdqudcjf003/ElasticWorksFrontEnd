@@ -22,9 +22,8 @@ import CIcon from '@coreui/icons-react'
 class CreateBoardComponent extends Component {
     constructor(props) {
         super(props);
-        const { cookies } = props;
         this.state = {
-            boardIdx: this.props.match.params.boardIdx,
+            idx: this.props.match.params.idx,
             title: '',
             content: '',
             writer: localStorage.getItem('authenticatedUser') || '',
@@ -33,7 +32,6 @@ class CreateBoardComponent extends Component {
 
         this.changeTitleHandler = this.changeTitleHandler.bind(this);
         this.changeContentHandler = this.changeContentHandler.bind(this);
-        // this.changeWriterHandler = this.changeWriterHandler.bind(this);
         this.changeCategoryHandler = this.changeCategoryHandler.bind(this);
         this.createBoard = this.createBoard.bind(this);
     }
@@ -41,12 +39,11 @@ class CreateBoardComponent extends Component {
     changeTitleHandler = (event) => {
         this.setState({ title: event.target.value });
     }
+
     changeContentHandler = (event) => {
         this.setState({ content: event.target.value });
     }
-    // changeWriterHandler = (event) => {
-    //     this.setState({ writer: event.target.value });
-    // }
+
     changeCategoryHandler = (event) => {
         this.setState({ category: event.target.value });
     }
@@ -61,44 +58,47 @@ class CreateBoardComponent extends Component {
 
         };
         console.log("board => " + JSON.stringify(board));
-        if (this.state.boardIdx === '_create') {
-            BoardService.createBoard(board).then(res => {
-                this.props.history.push('/board');
-            });
+        if (this.state.idx === '_create') {
+            BoardService.createBoard(board)
+                .then(res => {
+                    this.props.history.push('/all-board');
+                });
         } else {
-            BoardService.updateBoard(this.state.boardIdx, board).then(res => {
-                this.props.history.push('/board');
-            });
+            BoardService.updateBoard(this.state.idx, board)
+                .then(res => {
+                    this.props.history.push('/all-board');
+                });
         }
     }
 
     cancel() {
-        this.props.history.push('/board');
+        this.props.history.push('/all-board');
     }
 
     getTitle() {
-        if (this.state.boardIdx === '_create') {
-            return <h3 className="text-center">새 글을 작성해주세요</h3>
+        if (this.state.idx === '_create') {
+            return <h3 className="text-center"><large>새 게시글을 작성합니다.</large></h3>
         } else {
-            return <h3 className="text-center">{this.state.boardIdx} 글을 수정 합니다.</h3>
+            return <h3 className="text-center"><large>{this.state.idx}번 게시글을 수정 합니다.</large></h3>
         }
     }
 
     componentDidMount() {
-        if (this.state.boardIdx === '_create') {
+        if (this.state.idx === '_create') {
             return
         } else {
-            BoardService.getOneBoard(this.state.boardIdx).then((res) => {
-                let board = res.data;
-                console.log("board => " + JSON.stringify(board));
+            BoardService.getOneBoard(this.state.idx)
+                .then((res) => {
+                    let board = res.data;
+                    console.log("board => " + JSON.stringify(board));
 
-                this.setState({
-                    title: board.title,
-                    content: board.content,
-                    writer: board.writer,
-                    category: board.category
+                    this.setState({
+                        title: board.title,
+                        content: board.content,
+                        writer: board.writer,
+                        category: board.category
+                    });
                 });
-            });
         }
     }
 
@@ -110,7 +110,10 @@ class CreateBoardComponent extends Component {
                 <CCol xs="12" md="12">
                     <CCard>
                         <CCardHeader>
-                            <large> 게시글 작성</large>
+                            
+                                {
+                                    this.getTitle()
+                                }
                         </CCardHeader>
                         <CCardBody>
                             <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
@@ -119,7 +122,7 @@ class CreateBoardComponent extends Component {
                                         <CLabel name="title">작성자</CLabel>
                                     </CCol>
                                     <CCol xs="12" md="9">
-                                        <CInput type="text" id="text-input" name="writer" placeholder="작성자를 입력해주세요." value={this.state.writer}  />
+                                        <CInput type="text" id="text-input" name="writer" placeholder="작성자를 입력해주세요." value={this.state.writer} />
                                     </CCol>
                                 </CFormGroup>
                                 <CFormGroup row>
@@ -157,12 +160,12 @@ class CreateBoardComponent extends Component {
                                         </CSelect>
                                     </CCol>
                                 </CFormGroup>
-                                
+
                             </CForm>
                         </CCardBody>
                         <CCardFooter>
                             <CButton onClick={this.createBoard} type="submit" size="sm" color="outline-success"><CIcon name="cil-file" /> <midlle>글 작성</midlle></CButton>&nbsp;
-                             <CButton onClick={this.cancel.bind(this)} type="reset" size="sm" color="outline-danger"><CIcon name="cil-x-circle" /> <midlle>취소</midlle></CButton>
+                            <CButton onClick={this.cancel.bind(this)} type="reset" size="sm" color="outline-danger"><CIcon name="cil-x-circle" /> <midlle>취소</midlle></CButton>
                         </CCardFooter>
                     </CCard>
                 </CCol>
