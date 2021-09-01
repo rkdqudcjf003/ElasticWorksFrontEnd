@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import AdminService from '../../service/AdminService'
-
 class AdminComponent extends Component {
-    constructor(props) {
-        super(props)
 
         this.state = {
             
@@ -34,10 +30,11 @@ class AdminComponent extends Component {
 
         return (
             <div>
-                <button onClick={() => userList()}>회원 관리</button>
-                <button onClick={() => noticeBoardList()}>공지사항 관리</button>
-                <button onClick={() => faqBoardList()}>FAQ 관리</button>
-                <button onClick={() => qnaBoardList()}>QNA 관리</button>
+                <button onClick={() => {this.userList()}}>회원 관리</button>
+                <button onClick={() => {this.allBoardList()}}>전체 게시판 관리</button>
+                <button onClick={() => {this.noticeBoardList()}}>공지사항 관리</button>
+                <button onClick={() => {this.faqBoardList()}}>FAQ 관리</button>
+                <button onClick={() => {this.qnaBoardList()}}>QNA 관리</button>
             </div>
         )
     }
