@@ -1,22 +1,22 @@
 
-import axios from 'axios';
+import React, {Component} from 'react'
+import AdminService from 'src/service/AdminService';
+class AdminUserManagementComponent extends Component {
 
+   componentDidMount(){
+      AdminService.getMembers().then((res) =>{
+         console.log(res)
+      })
+   }
 
-const ADMIN_API_BASE_URL = "http://localhost:8222/api/admin";
+   render(){
+      return(
+         <div>
 
-class AdminUserManagementComponent {
-     getMembers(page_no, keyword, type) {
-         // console.log(axios.get(BOARD_API_BASE_URL + "/list?page_no=" + page_no +"&keyword=" + keyword));
-         let uri = '/list'; 
-         let param ='';
+         </div>
 
-         if(page_no !== null) {param +=  "page_no=" + page_no};
-         if(keyword !== null) {param +=  "&keyword=" + keyword};
-        if(type !== null) {param +=  "&type=" + type};
-
-        //  console.log(BOARD_API_BASE_URL + uri + "?" + param);
-        //  return axios.get(BOARD_API_BASE_URL + uri + "?" + param);
-     }
+      )
+   }
 }
 
 export default new AdminUserManagementComponent();

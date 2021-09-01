@@ -3,7 +3,7 @@ class AdminComponent extends Component {
 
     //회원리스트 출력
     userList = (props) => {
-      this.props.history.push('/admin/all-board')
+      this.props.history.push('/admin/all-user')
     }
 
     //전체 게시판 리스트 출력

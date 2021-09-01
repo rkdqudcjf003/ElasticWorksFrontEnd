@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BoardService from 'src/service/BoardService';
+import AdminService from 'src/service/AdminService';
 import {
     CCard,
     CCardBody,
@@ -18,6 +18,7 @@ import {
 import CIcon from '@coreui/icons-react'
 
 import { freeSet } from '@coreui/icons'
+
 
 
 
@@ -56,30 +57,27 @@ class AdminNoticeBoardManagementComponent extends Component {
     searchClick = () => {
         this.setState({ keyword: this.state.keyword });
         this.setState({ type: this.state.type });
-        this.listBoard(this.state.page_no, this.state.keyword, this.state.type);
+        this.listBoard(this.state.page_no, this.state.keyword, this.state.type, this.state.category);
     }
 
     createBoard() {
-        this.props.history.push('/board/create-board/_create');
+        this.props.history.push('/admin/createBoard/_create');
     }
 
 
-    readBoard(boardIdx) {
-        this.props.history.push(`/board/read-board/${boardIdx}`);
+    readBoard(idx) {
+        this.props.history.push(`/admin/selectOneBoard/${idx}`);
     }
-
-    // rowSelectHandler = () => {
-    //     this.readBoard(this.state.boards.boardIdx)
-    // }
 
     componentDidMount() {
-        BoardService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.category)
+        AdminService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.category)
             .then((res) => {
                 console.log(res);
                 this.setState({
                     page_no: res.data.pageInfo.currentPageNo,
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
+                    category: res.data.pageInfo.category,
                     paging: res.data.pageInfo,
                     boards: res.data.boardList
                 });
@@ -89,13 +87,14 @@ class AdminNoticeBoardManagementComponent extends Component {
     }
 
     listBoard(page_no, keyword, type, category) {
-        BoardService.getBoards(page_no, keyword, type, category)
+        AdminService.getBoards(page_no, keyword, type, category)
             .then((res) => {
                 console.log(res)
                 this.setState({
                     page_no: res.data.pageInfo.currentPageNo,
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
+                    category: res.data.pageInfo.category,
                     paging: res.data.pageInfo,
                     boards: res.data.boardList
                 });
@@ -110,7 +109,7 @@ class AdminNoticeBoardManagementComponent extends Component {
         }
 
         return ((pageNums.map((page) =>
-            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type)}>
+            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type, this.state.category)}>
                 <CButton color="secondary" key={page.toString()} >
                     {page}
                 </CButton>
@@ -122,7 +121,7 @@ class AdminNoticeBoardManagementComponent extends Component {
     isPagingPrev() {
         if (this.state.paging.prevPage) {
             return (
-                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword)} tabIndex="-1">
+                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
                     <CButton color="secondary">
                         ‹
                     </CButton>
@@ -134,7 +133,7 @@ class AdminNoticeBoardManagementComponent extends Component {
     isPagingNext() {
         if (this.state.paging.nextPage) {
             return (
-                <a href='#!' onClick={() => this.listBoard((this.state.paging.currentPageNo + 1), this.state.keyword, this.state.type)} tabIndex="-1" >
+                <a href='#!' onClick={() => this.listBoard((this.state.paging.currentPageNo + 1), this.state.keyword, this.state.type, this.state.category)} tabIndex="-1" >
                     <CButton color="secondary">
                         ›
                     </CButton>
@@ -146,7 +145,7 @@ class AdminNoticeBoardManagementComponent extends Component {
     isMoveToFirstPage() {
         if (this.state.page_no !== 1) {
             return (
-                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type)} tabIndex="-1">
+                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
                     <CButton color="secondary">
                         «
                     </CButton>
@@ -158,7 +157,7 @@ class AdminNoticeBoardManagementComponent extends Component {
     isMoveToLastPage() {
         if (this.state.page_no !== this.state.paging.pageTotalCount) {
             return (
-                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type)}>
+                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type, this.state.category)}>
                     <CButton color="secondary">
                         »
                     </CButton>
@@ -188,7 +187,7 @@ class AdminNoticeBoardManagementComponent extends Component {
                             <CCardBody>
                                 <CDataTable
                                     clickableRows
-                                    onRowClick={(item) => this.readBoard(item.boardIdx)}
+                                    onRowClick={(item) => this.readBoard(item.idx)}
                                     items={boards}
                                     fields={[
                                         { key: 'idx', label: '번호' },
