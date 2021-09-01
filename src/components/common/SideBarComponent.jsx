@@ -13,7 +13,6 @@ import {
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
-import ListUserComponent from '../admin/ListUserComponent'
 
 // sidebar nav config
 import navigation from 'src/components/common/_nav'

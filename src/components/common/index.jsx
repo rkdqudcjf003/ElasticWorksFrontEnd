@@ -23,8 +23,6 @@ import SelectOneBoardComponent from 'src/components/board/SelectOneBoardComponen
 import CreateUserComponent from 'src/components/user/CreateUserComponent'
 import SelectOneUserComponent from 'src/components/user/SelectOneUserComponent'
 
-import ListUserComponent from 'src/components/admin/ListUserComponent'
-
 import HeaderDropdownComponent from 'src/components/common/HeaderDropdownComponent'
 import HeaderDropdownMssgComponent from 'src/components/common/HeaderDropdownMssgComponent'
 import HeaderDropdownNotifComponent from 'src/components/common/HeaderDropdownNotifComponent'
@@ -72,7 +70,6 @@ export {
   CreateUserComponent,
   SelectOneUserComponent,
   //============================admin====================================
-  ListUserComponent,
 
   //============================Test용 JSX====================================
   // Test
