@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const ADMIN_API_BASE_URL = "http://localhost:8222/api/admin";
 
-class AdminService {
+class AdminUserManagementComponent {
      getMembers(page_no, keyword, type) {
          // console.log(axios.get(BOARD_API_BASE_URL + "/list?page_no=" + page_no +"&keyword=" + keyword));
          let uri = '/list'; 
@@ -19,5 +19,5 @@ class AdminService {
      }
 }
 
-export default new AdminService();
+export default new AdminUserManagementComponent();
 

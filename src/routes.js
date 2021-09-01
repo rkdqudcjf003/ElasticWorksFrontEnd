@@ -1,5 +1,12 @@
 import React from 'react';
-import AdminComponent from './components/admin/AdminComponent';
+
+
+const AdminAllBoardManagementComponent = React.lazy(() => import('./components/admin/AdminAllBoardManagementComponent'));
+const AdminComponent = React.lazy(() => import('./components/admin/AdminComponent'));
+const AdminFAQBoardManagementComponent = React.lazy(() => import('./components/admin/AdminFAQBoardManagementComponent'));
+const AdminNoticeBoardManagementComponent = React.lazy(() => import('./components/admin/AdminNoticeBoardManagementComponent'));
+const AdminQNABoardManagementComponent = React.lazy(() => import('./components/admin/AdminQNABoardManagementComponent'));
+const AdminUserManagementComponent = React.lazy(() => import('./components/admin/AdminUserManagementComponent'));
 
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -40,7 +47,6 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
 
-const ListUserComponent = React.lazy(() => import('./components/admin/ListUserComponent'));
 
 const AllBoardComponent = React.lazy(() => import('./components/board/AllBoardComponent'));
 const NoticeBoardComponent = React.lazy(() => import('./components/board/NoticeBoardComponent'));
@@ -119,7 +125,11 @@ const routes = [
   { path: '/logout', exact: true, name: '로그아웃', component: LogoutSuccessComponent },
   // { path: '/checkLogin', exact: true, name: '로그인확인', component: AuthenticatedRoute },
 
-  { path: '/admin', exact: true, name: '회원목록', component: AdminComponent },
+  { path: '/admin', exact: true, name: '관리자 페이지', component: AdminComponent },
+  { path: '/admin/all-board', exact: true, name: '전체 게시글 관리', component: AdminAllBoardManagementComponent },
+  { path: '/admin/notice-board', exact: true, name: '공지사항 관리', component: AdminNoticeBoardManagementComponent },
+  { path: '/admin/FAQ-board', exact: true, name: 'FAQ 관리', component: AdminFAQBoardManagementComponent },
+  { path: '/admin/QNA-board', exact: true, name: 'Q & A 관리', component: AdminQNABoardManagementComponent }
   // { path: '/test', exact: true, name: '테스트', component: Test }
 
 ];

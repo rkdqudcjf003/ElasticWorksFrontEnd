@@ -13,7 +13,6 @@ import {
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
-import ListUserComponent from '../admin/ListUserComponent'
 
 // sidebar nav config
 import navigation from 'src/components/common/_nav'
@@ -55,9 +54,8 @@ const SideBarComponent = () => {
         />
       </CSidebarBrand>
       <CSidebarNav>
-      //test
       {/* {adminOrNot()} */}
-        <CCreateElement
+        {/* <CCreateElement
           items={navigation}
           components={{
             CSidebarNavDivider,
@@ -65,7 +63,7 @@ const SideBarComponent = () => {
             CSidebarNavItem,
             CSidebarNavTitle
           }}
-        />
+        /> */}
       </CSidebarNav>
       <CSidebarMinimizer className="c-d-md-down-none"/>
     </CSidebar>
