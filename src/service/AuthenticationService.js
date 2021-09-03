@@ -4,11 +4,11 @@ import Cookies from 'js-cookie';
 const AUTH_API_BASE_URL = "http://localhost:8099";
 
 class AuthenticationService {
-    executeJwtAuthenticationService(userId, userPwd) {
+    executeJwtAuthenticationService(id, pwd) {
         return axios.post(AUTH_API_BASE_URL + "/login",
             {
-                userId,
-                userPwd
+                id,
+                pwd
             },
             {
                 withCredentials: true,
@@ -19,7 +19,7 @@ class AuthenticationService {
                     alert('로그인 스엉고엉!');
                     console.log("===================================================================================");
                     
-                    this.registerSuccessfulLoginForJwt(userId)
+                    this.registerSuccessfulLoginForJwt(id)
                 }
             })
             .catch((error) => {

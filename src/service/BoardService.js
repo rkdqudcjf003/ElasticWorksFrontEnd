@@ -6,14 +6,14 @@ const BOARD_API_BASE_URL = "http://localhost:8099/api/board";
 
 
 class BoardService {
-    getBoards(page_no, keyword, type, category) {
+    getBoards(pageNo, keyword, type, categoryIdx) {
         let uri = '/list';
         let param = '';
 
-        if (page_no !== null) { param += "page_no=" + page_no };
+        if (pageNo !== null) { param += "pageNo=" + pageNo };
         if (keyword !== null) { param += "&keyword=" + keyword };
         if (type !== null) { param += "&type=" + type };
-        param += "&category=" + category;
+        param += "&categoryIdx=" + categoryIdx;
 
         return axios.get(BOARD_API_BASE_URL + uri + "?" + param);
     }
@@ -33,7 +33,7 @@ class BoardService {
     }
 
     deleteBoard(idx, board) {
-        return axios.put(BOARD_API_BASE_URL + "/delete" + idx, board);
+        return axios.put(BOARD_API_BASE_URL + "/delete/" + idx, board);
     }
 }
 

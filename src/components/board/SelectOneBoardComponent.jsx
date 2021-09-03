@@ -19,14 +19,11 @@ import CIcon from '@coreui/icons-react'
 class SelectOneBoardComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             idx: this.props.match.params.idx,
             board: {}
         }
-
         this.goToUpdate = this.goToUpdate.bind(this);
-
     }
 
     componentDidMount() {
@@ -35,7 +32,7 @@ class SelectOneBoardComponent extends Component {
                 this.setState(
                     { board: res.data }
                 );
-                console.log("get result => " + JSON.stringify(res.data));
+                console.log("GET RESULT => " + JSON.stringify(res.data));
             });
     }
 
@@ -52,7 +49,7 @@ class SelectOneBoardComponent extends Component {
         if (window.confirm("정말로 글을 삭제하시겠습니까?\n삭제된 글은 복구 할 수 없습니다.")) {
             BoardService.deleteBoard(this.state.idx, this.state.board)
                 .then(res => {
-                    console.log("delete result => " + JSON.stringify(res));
+                    console.log("DELETE RESULT => " + JSON.stringify(res));
                     if (res.status == 200) {
                         this.props.history.push('/all-board');
                     } else {
@@ -104,11 +101,11 @@ class SelectOneBoardComponent extends Component {
                                 </CFormGroup>
                                 <CFormGroup row>
                                     <CCol md="3">
-                                        <CLabel htmlFor="category">카테고리</CLabel>
+                                        <CLabel htmlFor="categoryName">카테고리</CLabel>
                                     </CCol>
                                     <CCol xs="12" md="9">
-                                        <CSelect custom name="category" id="category" disabled >
-                                            <option value={this.state.board.category}>{this.state.board.category}</option>
+                                        <CSelect custom name="categoryName" id="categoryName" disabled >
+                                            <option value={this.state.board.categoryName}>{this.state.board.categoryName}</option>
                                         </CSelect>
                                     </CCol>
                                 </CFormGroup>

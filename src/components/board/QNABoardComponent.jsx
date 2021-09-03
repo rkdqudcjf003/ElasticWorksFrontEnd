@@ -28,11 +28,11 @@ class QNABoardComponent extends Component {
         super(props)
 
         this.state = {
-            page_no: 1,
+            pageNo: 1,
             keyword: "",
             type: "",
             paging: {},
-            category: 3,
+            categoryIdx: 3,
             boards: []
         }
 
@@ -56,7 +56,7 @@ class QNABoardComponent extends Component {
     searchClick = () => {
         this.setState({ keyword: this.state.keyword });
         this.setState({ type: this.state.type });
-        this.listBoard(this.state.page_no, this.state.keyword, this.state.type, this.state.category);
+        this.listBoard(this.state.pageNo, this.state.keyword, this.state.type, this.state.categoryIdx);
     }
 
     createBoard() {
@@ -69,14 +69,14 @@ class QNABoardComponent extends Component {
     }
 
     componentDidMount() {
-        BoardService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.category)
+        BoardService.getBoards(this.state.pageNo, this.state.keyword, this.state.type, this.state.categoryIdx)
             .then((res) => {
                 console.log(res);
                 this.setState({
-                    page_no: res.data.pageInfo.currentPageNo,
+                    pageNo: res.data.pageInfo.currentPageNo,
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
-                    category: res.data.pageInfo.category,
+                    categoryIdx: res.data.pageInfo.categoryIdx,
                     paging: res.data.pageInfo,
                     boards: res.data.boardList
                 });
@@ -85,15 +85,15 @@ class QNABoardComponent extends Component {
 
     }
 
-    listBoard(page_no, keyword, type, category) {
-        BoardService.getBoards(page_no, keyword, type, category)
+    listBoard(pageNo, keyword, type, categoryIdx) {
+        BoardService.getBoards(pageNo, keyword, type, categoryIdx)
             .then((res) => {
             console.log(res)
             this.setState({
-                page_no: res.data.pageInfo.currentPageNo,
+                pageNo: res.data.pageInfo.currentPageNo,
                 type: res.data.pageInfo.searchType,
                 keyword: res.data.pageInfo.searchKeyword,
-                category: res.data.pageInfo.category,
+                categoryIdx: res.data.pageInfo.categoryIdx,
                 paging: res.data.pageInfo,
                 boards: res.data.boardList
             });
@@ -108,7 +108,7 @@ class QNABoardComponent extends Component {
         }
 
         return ((pageNums.map((page) =>
-            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type, this.state.category)}>
+            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type, this.state.categoryIdx)}>
                 <CButton color="secondary" key={page.toString()} >
                     {page}
                 </CButton>
@@ -120,7 +120,7 @@ class QNABoardComponent extends Component {
     isPagingPrev() {
         if (this.state.paging.prevPage) {
             return (
-                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
+                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword, this.state.type, this.state.categoryIdx)} tabIndex="-1">
                     <CButton color="secondary">
                         ‹
                     </CButton>
@@ -142,9 +142,9 @@ class QNABoardComponent extends Component {
     }
 
     isMoveToFirstPage() {
-        if (this.state.page_no !== 1) {
+        if (this.state.pageNo !== 1) {
             return (
-                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
+                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type, this.state.categoryIdx)} tabIndex="-1">
                     <CButton color="secondary">
                         «
                     </CButton>
@@ -154,9 +154,9 @@ class QNABoardComponent extends Component {
     }
 
     isMoveToLastPage() {
-        if (this.state.page_no !== this.state.paging.pageTotalCount) {
+        if (this.state.pageNo !== this.state.paging.pageTotalCount) {
             return (
-                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type, this.state.category)}>
+                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type, this.state.categoryIdx)}>
                     <CButton color="secondary">
                         »
                     </CButton>
@@ -193,7 +193,7 @@ class QNABoardComponent extends Component {
                                         { key: 'title', label: '제목' },
                                         { key: 'writer', label: '작성자' },
                                         { key: 'content', label: '내용' },
-                                        { key: 'category', label: '카테고리' },
+                                        { key: 'categoryName', label: '카테고리' },
                                         { key: 'view', label: '조회수' },
                                         { key: 'likeCnt', label: '좋아요' },
                                         { key: 'insertTime', label: '작성시간' },
@@ -234,7 +234,6 @@ class QNABoardComponent extends Component {
                                                     <CCol xs="12" md="12">
                                                         <CInputGroup >
                                                             <CSelect custom name="type" id="type" value={type} onChange={typeChange}>
-                                                                <option value="">전체</option>
                                                                 <option value="title">제목</option>
                                                                 <option value="content">내용</option>
                                                                 <option value="writer">작성자</option>
