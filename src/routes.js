@@ -1,12 +1,14 @@
 import React from 'react';
 
 
-const AdminAllBoardManagementComponent = React.lazy(() => import('./components/admin/AdminAllBoardManagementComponent'));
+const AdminAllBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminAllBoardManagementComponent'));
 const AdminComponent = React.lazy(() => import('./components/admin/AdminComponent'));
-const AdminFAQBoardManagementComponent = React.lazy(() => import('./components/admin/AdminFAQBoardManagementComponent'));
-const AdminNoticeBoardManagementComponent = React.lazy(() => import('./components/admin/AdminNoticeBoardManagementComponent'));
-const AdminQNABoardManagementComponent = React.lazy(() => import('./components/admin/AdminQNABoardManagementComponent'));
-const AdminUserManagementComponent = React.lazy(() => import('./components/admin/AdminUserManagementComponent'));
+const AdminFAQBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminFAQBoardManagementComponent'));
+const AdminNoticeBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminNoticeBoardManagementComponent'));
+const AdminQNABoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminQNABoardManagementComponent'));
+const AdminSelectOneBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminSelectOneBoardManagementComponent'))
+const AdminCreateBoardComponent = React.lazy(() => import('./components/admin/board/AdminCreateBoardComponent'))
+const AdminUserManagementComponent = React.lazy(() => import('./components/admin/user/AdminUserManagementComponent'));
 
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -126,10 +128,13 @@ const routes = [
   // { path: '/checkLogin', exact: true, name: '로그인확인', component: AuthenticatedRoute },
 
   { path: '/admin', exact: true, name: '관리자 페이지', component: AdminComponent },
+  { path: '/admin/all-user', exact: true, name: '회원 관리', component: AdminUserManagementComponent },
   { path: '/admin/all-board', exact: true, name: '전체 게시글 관리', component: AdminAllBoardManagementComponent },
   { path: '/admin/notice-board', exact: true, name: '공지사항 관리', component: AdminNoticeBoardManagementComponent },
   { path: '/admin/FAQ-board', exact: true, name: 'FAQ 관리', component: AdminFAQBoardManagementComponent },
-  { path: '/admin/QNA-board', exact: true, name: 'Q & A 관리', component: AdminQNABoardManagementComponent }
+  { path: '/admin/QNA-board', exact: true, name: 'Q & A 관리', component: AdminQNABoardManagementComponent },
+  { path: '/admin/selectOneBoard/:idx', exact: true, name: '게시글 조회 관리', component: AdminSelectOneBoardManagementComponent },
+  { path: '/admin/createBoard/:idx', exact: true, name: '게시글 작성', component: AdminCreateBoardComponent }
   // { path: '/test', exact: true, name: '테스트', component: Test }
 
 ];
