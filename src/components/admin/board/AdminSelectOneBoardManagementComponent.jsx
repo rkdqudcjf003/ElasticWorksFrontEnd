@@ -45,7 +45,7 @@ class AdminSelectOneBoardManagementComponent extends Component {
 
     goToUpdate = (event) => {
         event.preventDefault();
-        this.props.history.push(`/board/create-board/${this.state.idx}`);
+        this.props.history.push(`/admin/createBoard/${this.state.idx}`);
     }
 
     deleteView = async function () {
@@ -54,7 +54,7 @@ class AdminSelectOneBoardManagementComponent extends Component {
                 .then(res => {
                     console.log("delete result => " + JSON.stringify(res));
                     if (res.status == 200) {
-                        this.props.history.push('/all-board');
+                        this.props.history.push('/admin/all-board');
                     } else {
                         alert("글 삭제가 실패했습니다.");
                     }
@@ -104,11 +104,11 @@ class AdminSelectOneBoardManagementComponent extends Component {
                                 </CFormGroup>
                                 <CFormGroup row>
                                     <CCol md="3">
-                                        <CLabel htmlFor="category">카테고리</CLabel>
+                                        <CLabel htmlFor="categoryIdx">카테고리</CLabel>
                                     </CCol>
                                     <CCol xs="12" md="9">
-                                        <CSelect custom name="category" id="category" disabled >
-                                            <option value={this.state.board.category}>{this.state.board.category}</option>
+                                        <CSelect custom name="categoryIdx" id="categoryIdx" disabled >
+                                            <option value={this.state.board.categoryIdx}>{this.state.board.categoryIdx}</option>
                                         </CSelect>
                                     </CCol>
                                 </CFormGroup>

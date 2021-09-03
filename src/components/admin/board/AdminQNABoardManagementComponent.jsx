@@ -24,7 +24,7 @@ import { freeSet } from '@coreui/icons'
 
 
 
-class AdminFAQBoardManagementComponent extends Component {
+class AdminQNABoardManagementComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -33,7 +33,7 @@ class AdminFAQBoardManagementComponent extends Component {
             keyword: "",
             type: "",
             paging: {},
-            category: 2,
+            categoryIdx: 3,
             boards: []
         }
 
@@ -57,7 +57,7 @@ class AdminFAQBoardManagementComponent extends Component {
     searchClick = () => {
         this.setState({ keyword: this.state.keyword });
         this.setState({ type: this.state.type });
-        this.listBoard(this.state.page_no, this.state.keyword, this.state.type, this.state.category);
+        this.listBoard(this.state.page_no, this.state.keyword, this.state.type, this.state.categoryIdx);
     }
 
     createBoard() {
@@ -70,42 +70,46 @@ class AdminFAQBoardManagementComponent extends Component {
     }
 
     componentDidMount() {
-        AdminService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.category)
+        AdminService.getBoards(this.state.page_no, this.state.keyword, this.state.type, this.state.categoryIdx)
             .then((res) => {
                 console.log(res);
                 this.setState({
                     page_no: res.data.pageInfo.currentPageNo,
                     type: res.data.pageInfo.searchType,
                     keyword: res.data.pageInfo.searchKeyword,
-                    category: res.data.pageInfo.category,
+                    categoryIdx: res.data.pageInfo.categoryIdx,
                     paging: res.data.pageInfo,
                     boards: res.data.boardList
                 });
+
             });
+
     }
 
-    listBoard(page_no, keyword, type, category) {
-        AdminService.getBoards(page_no, keyword, type, category)
+    listBoard(page_no, keyword, type, categoryIdx) {
+        AdminService.getBoards(page_no, keyword, type, categoryIdx)
             .then((res) => {
-                console.log(res)
-                this.setState({
-                    page_no: res.data.pageInfo.currentPageNo,
-                    type: res.data.pageInfo.searchType,
-                    keyword: res.data.pageInfo.searchKeyword,
-                    category: res.data.pageInfo.category,
-                    paging: res.data.pageInfo,
-                    boards: res.data.boardList
-                });
+            console.log(res)
+            this.setState({
+                page_no: res.data.pageInfo.currentPageNo,
+                type: res.data.pageInfo.searchType,
+                keyword: res.data.pageInfo.searchKeyword,
+                categoryIdx: res.data.pageInfo.categoryIdx,
+                paging: res.data.pageInfo,
+                boards: res.data.boardList
             });
+        });
     }
 
     viewPaging() {
         const pageNums = [];
+
         for (let i = this.state.paging.startPageNo; i <= this.state.paging.endPageNo; i++) {
             pageNums.push(i);
         }
+
         return ((pageNums.map((page) =>
-            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type, this.state.category)}>
+            <a href='#!' onClick={() => this.listBoard(page, this.state.keyword, this.state.type, this.state.categoryIdx)}>
                 <CButton color="secondary" key={page.toString()} >
                     {page}
                 </CButton>
@@ -117,7 +121,7 @@ class AdminFAQBoardManagementComponent extends Component {
     isPagingPrev() {
         if (this.state.paging.prevPage) {
             return (
-                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
+                <a href="#!" onClick={() => this.listBoard((this.state.paging.currentPageNo - 1), this.state.keyword, this.state.type, this.state.categoryIdx)} tabIndex="-1">
                     <CButton color="secondary">
                         ‹
                     </CButton>
@@ -129,7 +133,7 @@ class AdminFAQBoardManagementComponent extends Component {
     isPagingNext() {
         if (this.state.paging.nextPage) {
             return (
-                <a href='#!' onClick={() => this.listBoard((this.state.paging.currentPageNo + 1), this.state.keyword, this.state.type, this.state.category)} tabIndex="-1" >
+                <a href='#!' onClick={() => this.listBoard((this.state.paging.currentPageNo + 1), this.state.keyword, this.state.type)} tabIndex="-1" >
                     <CButton color="secondary">
                         ›
                     </CButton>
@@ -141,7 +145,7 @@ class AdminFAQBoardManagementComponent extends Component {
     isMoveToFirstPage() {
         if (this.state.page_no !== 1) {
             return (
-                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type, this.state.category)} tabIndex="-1">
+                <a href='#!' onClick={() => this.listBoard(1, this.state.keyword, this.state.type, this.state.categoryIdx)} tabIndex="-1">
                     <CButton color="secondary">
                         «
                     </CButton>
@@ -153,7 +157,7 @@ class AdminFAQBoardManagementComponent extends Component {
     isMoveToLastPage() {
         if (this.state.page_no !== this.state.paging.pageTotalCount) {
             return (
-                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type, this.state.category)}>
+                <a href="#~" onClick={() => this.listBoard((this.state.paging.pageTotalCount), this.state.keyword, this.state.type, this.state.categoryIdx)}>
                     <CButton color="secondary">
                         »
                     </CButton>
@@ -190,7 +194,7 @@ class AdminFAQBoardManagementComponent extends Component {
                                         { key: 'title', label: '제목' },
                                         { key: 'writer', label: '작성자' },
                                         { key: 'content', label: '내용' },
-                                        { key: 'category', label: '카테고리' },
+                                        { key: 'categoryIdx', label: '카테고리' },
                                         { key: 'view', label: '조회수' },
                                         { key: 'likeCnt', label: '좋아요' },
                                         { key: 'insertTime', label: '작성시간' },
@@ -258,4 +262,4 @@ class AdminFAQBoardManagementComponent extends Component {
     }
 }
 
-export default AdminFAQBoardManagementComponent;
+export default AdminQNABoardManagementComponent;

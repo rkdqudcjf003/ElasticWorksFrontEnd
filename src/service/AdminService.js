@@ -23,36 +23,45 @@ class AdminService {
     }
 
     //all-board list 출력
-    getBoards(page_no, keyword, type, category) {
-        let uri = '/boardList';
+    getBoards(page_no, keyword, type, categoryIdx) {
         let param = '';
 
-        if (page_no !== null) { param += "page_no=" + page_no };
+        if (page_no !== null) { param += "pageNo=" + page_no };
         if (keyword !== null) { param += "&keyword=" + keyword };
         if (type !== null) { param += "&type=" + type };
-        param += "&categoryIdx=" + category;
-
-        return axios.get(ADMIN_API_BASE_URL + uri + "?" + param);
+        param += "&categoryIdx=" + categoryIdx;
+        return axios.get(ADMIN_API_BASE_URL + "/boardList?"+ param);
     }
 
+    //board 생성
     createBoard(board) {
         return axios.post(ADMIN_API_BASE_URL + "/insert", board);
     }
 
+    //board 조회
     getOneBoard(idx) {
         return axios.get(ADMIN_API_BASE_URL + "/read/" + idx);
 
     }
 
+    //board 수정
     updateBoard(idx, board) {
         return axios.put(ADMIN_API_BASE_URL + "/" + idx, board);
 
     }
 
-    deleteBoard(idx, board) {
-        return axios.put(ADMIN_API_BASE_URL + "/delete/" + idx, board);
+    //board 삭제
+    deleteBoard(idx) {
+        console.log(ADMIN_API_BASE_URL + "/delete/" + idx)
+        return axios.put(ADMIN_API_BASE_URL + "/delete/" + idx);
+    }
+    
+    //popupList 출력
+    getPopup(){
+        return axios.get(ADMIN_API_BASE_URL + "/popupList");
     }
 }
+
 
 
 export default new AdminService();

@@ -27,7 +27,7 @@ class AdminCreateBoardComponent extends Component {
             title: '',
             content: '',
             writer: localStorage.getItem('authenticatedUser') || '',
-            category: ''
+            categoryIdx: ''
         }
 
         this.changeTitleHandler = this.changeTitleHandler.bind(this);
@@ -45,7 +45,7 @@ class AdminCreateBoardComponent extends Component {
     }
 
     changeCategoryHandler = (event) => {
-        this.setState({ category: event.target.value });
+        this.setState({ categoryIdx: event.target.value });
     }
 
     createBoard = (event) => {
@@ -54,19 +54,19 @@ class AdminCreateBoardComponent extends Component {
             title: this.state.title,
             content: this.state.content,
             writer: this.state.writer,
-            category: this.state.category
+            categoryIdx: this.state.categoryIdx
 
         };
         console.log("board => " + JSON.stringify(board));
         if (this.state.idx === '_create') {
             AdminService.createBoard(board)
                 .then(res => {
-                    this.props.history.push('/all-board');
+                    this.props.history.push('/admin/all-board');
                 });
         } else {
             AdminService.updateBoard(this.state.idx, board)
                 .then(res => {
-                    this.props.history.push('/all-board');
+                    this.props.history.push('/admin/all-board');
                 });
         }
     }
@@ -96,7 +96,7 @@ class AdminCreateBoardComponent extends Component {
                         title: board.title,
                         content: board.content,
                         writer: board.writer,
-                        category: board.category
+                        categoryIdx: board.categoryIdx
                     });
                 });
         }
@@ -149,10 +149,10 @@ class AdminCreateBoardComponent extends Component {
                                 </CFormGroup>
                                 <CFormGroup row>
                                     <CCol md="3">
-                                        <CLabel htmlFor="category">카테고리</CLabel>
+                                        <CLabel htmlFor="categoryIdx">카테고리</CLabel>
                                     </CCol>
                                     <CCol xs="12" md="9">
-                                        <CSelect custom name="category" id="category" value={this.state.category} onChange={this.changeCategoryHandler}>
+                                        <CSelect custom name="categoryIdx" id="categoryIdx" value={this.state.categoryIdx} onChange={this.changeCategoryHandler}>
                                             <option value="0">카테고리를 선택해주세요.</option>
                                             <option value="1">공지사항</option>
                                             <option value="1">FAQ</option>

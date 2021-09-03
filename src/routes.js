@@ -1,14 +1,14 @@
 import React from 'react';
 
 
-const AdminAllBoardManagementComponent = React.lazy(() => import('./components/admin/AdminAllBoardManagementComponent'));
+const AdminAllBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminAllBoardManagementComponent'));
 const AdminComponent = React.lazy(() => import('./components/admin/AdminComponent'));
-const AdminFAQBoardManagementComponent = React.lazy(() => import('./components/admin/AdminFAQBoardManagementComponent'));
-const AdminNoticeBoardManagementComponent = React.lazy(() => import('./components/admin/AdminNoticeBoardManagementComponent'));
-const AdminQNABoardManagementComponent = React.lazy(() => import('./components/admin/AdminQNABoardManagementComponent'));
-const AdminSelectOneBoardManagementComponent = React.lazy(() => import('./components/admin/AdminSelectOneBoardManagementComponent'))
-const AdminCreateBoardComponent = React.lazy(() => import('./components/admin/AdminCreateBoardComponent'))
-const AdminUserManagementComponent = React.lazy(() => import('./components/admin/AdminUserManagementComponent'));
+const AdminFAQBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminFAQBoardManagementComponent'));
+const AdminNoticeBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminNoticeBoardManagementComponent'));
+const AdminQNABoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminQNABoardManagementComponent'));
+const AdminSelectOneBoardManagementComponent = React.lazy(() => import('./components/admin/board/AdminSelectOneBoardManagementComponent'))
+const AdminCreateBoardComponent = React.lazy(() => import('./components/admin/board/AdminCreateBoardComponent'))
+const AdminUserManagementComponent = React.lazy(() => import('./components/admin/user/AdminUserManagementComponent'));
 
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
